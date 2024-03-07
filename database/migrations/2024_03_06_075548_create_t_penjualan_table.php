@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('t_penjualan_detail', function (Blueprint $table) {
             $table->id('detail_id');
-            $table->unsignedBigInteger('penjualan_id')->index();
+            $table->unsignedBigInteger('id_penjualan');
             $table->unsignedBigInteger('barang_id')->index();
             $table->integer('harga');
             $table->integer('jumlah');
             $table->timestamps();
 
-            $table->foreign('penjualan_id')->references('penjualan_id')->on('t_penjualan');
+            $table->foreign('id_penjualan')->references('id_penjualan')->on('t_penjualan');
             $table->foreign('barang_id')->references('barang_id')->on('m_barang');
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('t_penjualan_detail');
+        Schema::dropIfExists('t_penjualan');
     }
 };
