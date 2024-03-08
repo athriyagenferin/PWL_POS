@@ -8,24 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class UserModel extends Model
 
 //jobsheet 3
-// {
-//     use HasFactory;
-
-//     protected $table = 'm_user'; // Mendefinisikan nama tabel yang digunakan oleh model ini
-//     protected $primaryKey = 'user_id'; // Mendefinisikan primary key dari tabel yang digunakan
-
-    
-// }
 {
     use HasFactory;
 
     protected $table = 'm_user'; // Mendefinisikan nama tabel yang digunakan oleh model ini
     protected $primaryKey = 'user_id'; // Mendefinisikan primary key dari tabel yang digunakan
+
     
-    /**
-     * The attributes that are mass assignable.
-     * 
-     * @var array
-     */
-    protected $fillable = ['level_id','username','nama',];
 }
+
+// {
+//     use HasFactory;
+
+//     protected $table = 'm_user'; // Mendefinisikan nama tabel yang digunakan oleh model ini
+//     protected $primaryKey = 'user_id'; // Mendefinisikan primary key dari tabel yang digunakan
+    
+//     /**
+//      * The attributes that are mass assignable.
+//      * 
+//      * @var array
+//      */
+//     protected $fillable = ['level_id','username','nama',];
+// }
