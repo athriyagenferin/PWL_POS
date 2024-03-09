@@ -28,18 +28,18 @@ class UserController extends Controller
         // $user = UserModel::all(); // ambil semua data dari tabel m_user
         // return view('user', ['data' => $user]);
 
-        $data = [
-            'nama' => 'Pelanggan Pertama',
-        ];
+        // $data = [
+        //     'nama' => 'Pelanggan Pertama',
+        // ];
 
-        UserModel::where('username', 'customer-1')->update($data); // update data ke tabel m_user
+        // UserModel::where('username', 'customer-1')->update($data); // update data ke tabel m_user
 
-        //coba akses model UserModel
-        $user = UserModel::all(); // ambil semua data dari tabel m_user
-        return view('user', ['data' => $user]);
+        // //coba akses model UserModel
+        // $user = UserModel::all(); // ambil semua data dari tabel m_user
+        // return view('user', ['data' => $user]);
 
-        // //Jobsheet 4
-        // //PRAKTIKUM 1
+        //Jobsheet 4
+        //PRAKTIKUM 1
         // $data = [
         //     'level_id' => 2,
         //     'username' => 'manager_tiga',
@@ -58,9 +58,13 @@ class UserController extends Controller
         // $user = UserModel::where('level_id', 1)->first();
         // return view('user', ['data' => $user]);
     
-        //     $user = UserModel::firstWhere('level_id', 1);
-        //     return view('user', ['data' => $user]);
+            // $user = UserModel::firstWhere('level_id', 1);
+            // return view('user', ['data' => $user]);
 
-    
+        $user = UserModel::findOr(20, ['username', 'nama'],function() {
+            abort(404);
+        });
+        
+        return view('user', ['data' => $user]);
     }
 }
