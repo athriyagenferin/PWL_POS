@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index()
-    {
+    // public function index()
+    // {
         //jobsheet 3
         //coba akses model UserModel
         // $user = UserModel::all(); // ambil semua data dari tabel m_user
@@ -134,10 +134,10 @@ class UserController extends Controller
         // $user->wasChanged('nama'); //false
         // dd($user->wasChanged(['nama', 'username']));//true
 
-        //Practicum 2.6 - CRUD
-        $user = UserModel::all();
-        return view('user', ['data' => $user]);
-        }
+        // //Practicum 2.6 - CRUD
+        // $user = UserModel::all();
+        // return view('user', ['data' => $user]);
+        // }
         
         public function tambah()
         {
@@ -178,7 +178,14 @@ class UserController extends Controller
             $user->delete();
             return redirect('/user');
         }
-    }
+
+        //Praktikum 2.7
+        public function index()
+        {
+            $user = UserModel::with('level')->get();
+            return view('user',['data'=>$user]);
+        }
+}
 
 
 
