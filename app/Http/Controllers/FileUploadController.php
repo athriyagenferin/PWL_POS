@@ -1,16 +1,42 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 class FileUploadController extends Controller
 {
-    public function fileUpload()
+    public function showFileUploadForm()
     {
-        return view('file-upload');
+        return view('assignment');
     }
-    public function prosesFileUpload(Request $request){
+
+    public function handleFileUpload(Request $request)
+    {
+        $request->validate([
+            'file_name' => 'required|string',
+            'file' => 'required|file|image|max:500',
+        ]);
+
+        $extension = $request->file->getClientOriginalExtension();
+        $completeFileName = $request->file_name . '.' . $extension;
+
+        $storedPath = $request->file->move('images', $completeFileName);
+        $storedPath = str_replace("\\", "//", $storedPath);
+
+        $publicPath = url('images/' . $completeFileName);
+        return "
+            Image successfully uploaded to <a href='$publicPath'>$completeFileName</a>
+            <br>
+            <img src='$publicPath' alt='$completeFileName' style='max-width: 500px; height: auto;'>
+        ";
+    }
+}
+
+    // public function fileUpload()
+    // {
+    //     return view('file-upload');
+    // }
+    // public function prosesFileUpload(Request $request){
 
         //dump($request->berkas);
         //dump($request->file('berkas'));
@@ -32,27 +58,26 @@ class FileUploadController extends Controller
         //     echo "Tidak ada berkas yang diupload";
         // }
 
-        // Validate the file upload
-        $request->validate([
-        //     'berkas'=>'required|file|image|max:500',
-        // ]);
-        'berkas'=>'required|file|image|max:500',]);
-        // echo $request->berkas->getClientOriginalName()."lolos validasi";
-        $textFile = $request->berkas->getClientOriginalName();
-        $namaFile ='web'.time().".".$textFile;
-        // $path = $request->berkas->storeAs('uploads', $namaFile);
-        // echo "proses upload berhasil, data disimpan pada: $path";
-        //$path = $request->berkas->storeAs('public', $namaFile);
+        // // Validate the file upload
+        // $request->validate([
+        // //     'berkas'=>'required|file|image|max:500',
+        // // ]);
+        // 'berkas'=>'required|file|image|max:500',]);
+        // // echo $request->berkas->getClientOriginalName()."lolos validasi";
+        // $textFile = $request->berkas->getClientOriginalName();
+        // $namaFile ='web'.time().".".$textFile;
+        // // $path = $request->berkas->storeAs('uploads', $namaFile);
+        // // echo "proses upload berhasil, data disimpan pada: $path";
+        // //$path = $request->berkas->storeAs('public', $namaFile);
 
-        //$pathBaru=asset('storage/'.$namaFile);
-        $path = $request->berkas->move('gambar', $namaFile);
-        $path = str_replace("\\","//", $path);
-        echo "variable path berisi:$path <br>";
+        // //$pathBaru=asset('storage/'.$namaFile);
+        // $path = $request->berkas->move('gambar', $namaFile);
+        // $path = str_replace("\\","//", $path);
+        // echo "variable path berisi:$path <br>";
 
-        $pathBaru=asset('gambar/'.$namaFile);
-        
-        echo "proses upload berhasil, data disimpan pada:$path";
-        echo "<br>";
-        echo "Tampilkan link: <a href='$pathBaru'>$pathBaru</a>";
-    }
-}
+        // $pathBaru=asset('gambar/'.$namaFile);
+
+        // echo "proses upload berhasil, data disimpan pada:$path";
+        // echo "<br>";
+        // echo "Tampilkan link: <a href='$pathBaru'>$pathBaru</a>";
+    
