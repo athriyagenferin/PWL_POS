@@ -34,16 +34,23 @@ class FileUploadController extends Controller
 
         // Validate the file upload
         $request->validate([
-            'berkas'=>'required|file|image|max:500',
-        ]);
+        //     'berkas'=>'required|file|image|max:500',
+        // ]);
+        'berkas'=>'required|file|image|max:500',]);
         // echo $request->berkas->getClientOriginalName()."lolos validasi";
         $textFile = $request->berkas->getClientOriginalName();
         $namaFile ='web'.time().".".$textFile;
         // $path = $request->berkas->storeAs('uploads', $namaFile);
         // echo "proses upload berhasil, data disimpan pada: $path";
-        $path = $request->berkas->storeAs('public', $namaFile);
+        //$path = $request->berkas->storeAs('public', $namaFile);
 
-        $pathBaru=asset('storage/'.$namaFile);
+        //$pathBaru=asset('storage/'.$namaFile);
+        $path = $request->berkas->move('gambar', $namaFile);
+        $path = str_replace("\\","//", $path);
+        echo "variable path berisi:$path <br>";
+
+        $pathBaru=asset('gambar/'.$namaFile);
+        
         echo "proses upload berhasil, data disimpan pada:$path";
         echo "<br>";
         echo "Tampilkan link: <a href='$pathBaru'>$pathBaru</a>";
