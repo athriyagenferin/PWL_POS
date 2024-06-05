@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'level_id' => 1,
             'username' => 'admin',
             'nama' => 'Administrator',
+            'image' => 'admin.png',
             'password' => Hash::make('12345'),
             ],
             [
@@ -27,6 +28,8 @@ class UserSeeder extends Seeder
             'level_id' => 2,
             'username' => 'manager',
             'nama' => 'Manager',
+            'image' => 'admin.png',
+
             'password' => Hash::make('12345'),
             ],
             [
@@ -34,6 +37,7 @@ class UserSeeder extends Seeder
             'level_id' => 3,
             'username' => 'staff',
             'nama' => 'Staff/Kasir',
+            'image' => 'admin.png',
             'password' => Hash::make('12345'),
             ],
             ];
